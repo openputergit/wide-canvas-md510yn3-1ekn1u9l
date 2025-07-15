@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunita's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .nav-item {
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            perspective: 1000px;
+        }
+        
+        .nav-item:hover {
+            transform: translateZ(20px) rotateX(10deg);
+        }
+
+        .hero-title {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1, #3b82f6, #2dd4bf);
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-['Poppins']">
+    <div class="min-h-screen">
+        <!-- Hero Section -->
+        <div class="gradient-bg min-h-screen flex flex-col items-center justify-center text-white p-8">
+            <h1 class="hero-title text-6xl md:text-7xl font-bold mb-8 text-center">Welcome to My Portfolio</h1>
+            <nav class="flex flex-wrap justify-center gap-6 mt-12">
+                <a href="about.html" class="nav-item bg-white/20 hover:bg-white/30 px-8 py-4 rounded-xl backdrop-blur-md text-xl font-semibold transition-all">About Me</a>
+                <a href="experience.html" class="nav-item bg-white/20 hover:bg-white/30 px-8 py-4 rounded-xl backdrop-blur-md text-xl font-semibold transition-all">Experience</a>
+                <a href="achievements.html" class="nav-item bg-white/20 hover:bg-white/30 px-8 py-4 rounded-xl backdrop-blur-md text-xl font-semibold transition-all">Achievements</a>
+                <a href="skills.html" class="nav-item bg-white/20 hover:bg-white/30 px-8 py-4 rounded-xl backdrop-blur-md text-xl font-semibold transition-all">Skills</a>
+                <a href="contact.html" class="nav-item bg-white/20 hover:bg-white/30 px-8 py-4 rounded-xl backdrop-blur-md text-xl font-semibold transition-all">Contact</a>
+            </nav>
+        </div>
+
+        <!-- Social Links -->
+        <div class="fixed bottom-8 right-8 flex gap-4">
+            <a href="mailto:Sunitapatil8101977@gmail.com" class="bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 transition-all">
+                <i class="bi bi-envelope-fill text-2xl"></i>
+            </a>
+            <a href="tel:8108444925" class="bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 transition-all">
+                <i class="bi bi-telephone-fill text-2xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add parallax effect to cards
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('mousemove', (e) => {
+                const rect = item.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xRotation = (y - rect.height / 2) / 20;
+                const yRotation = (x - rect.width / 2) / -20;
+                
+                item.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) translateZ(20px)`;
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
